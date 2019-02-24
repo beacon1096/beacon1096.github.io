@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>猫窝 - 新家</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Beacon1096,"> 
+    <meta name="description" content="一个超级无敌蒟蒻的OIer,"> 
+    <meta name="author" content="Beacon Zhang"> 
+    <link rel="alternative" href="atom.xml" title="猫窝" type="application/atom+xml"> 
+    <link rel="icon" href="https://beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">NOIP2017 奶酪 台本</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">NOIP2017 奶酪 台本</h1>
+        <div class="stuff">
+            <span>八月 31, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/2018/">2018</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/NOIP/">NOIP</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/NOIP2017/">NOIP2017</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/并查集/">并查集</a></li></ul>
+
+
+        </div>
+        <div class="content markdown" id="article">
+            <hr>
+<p>前排提示:这篇是完完全全的台本。<br>所以有的图示文中没有是正常的。<br>配的视频是同事录制的，我自己录制的会在不久后上传。  </p>
+<hr>
+<p>作为第二天第一题，本题难度不会高到哪里去，经验丰富的选手甚至瞄一眼就已经能看出要用什么方法去做这一题了。                                       .<br>相对的，把这一题想得过分复杂会很影响对这一题的判断，严重影响自己的发挥和分数。<br>(现在我们把题目大致读一下。)<br>(现有一块奶酪，给定高度为h，长宽认作无限大，奶酪中有许多半径相同的球形空洞，在奶酪中建立空间坐标系，下表面为z=0，上表面为z=h。若两空洞相切或者相交则认作两空洞联通，也就是小老鼠可以从一个空洞跑到另一个空洞；若空洞与上下表面相交或者相切则认作空洞与对应的表面联通。求是否存在一条路径使得小老鼠能从下表面经过中间的小洞到达上表面)  </p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>我们首先来解决如何判定两个空洞相切或者相交的问题。在二维空间上，判断两个圆是否详解或者相交是比较简单的。我们可以看一下输入输出样例1给出的几幅图。<br>(在第一个图中，两个圆圆心的距离等于两个圆的半径的和，此时两个圆是相切的;<br>在第二个图中，两个圆圆心的距离大于两个圆的半径的和，此时两个圆是相离的;<br>在第三个图中，两个圆圆心的距离小于两个圆的半径的和，此时两个圆是相交的。)<br>在三维的立体空间里，判断球与球是否相切或相交也是一样的原理。而且出题人十分友好地在题面中告诉了我们求空间中两个点的距离的公式，我们可以加以利用，直接将求得的距离与两倍的r进行对比；如果距离小于等于2r，则两球相交或者相切。<br>相比之下，判断两球与上下表面是否相交或相切则更为简单。我们仍然以输入输出样例1给出的第一幅图进行说明。<br>(对于上面的小球，我们可以看到小球球心到上表面的距离为r，此时小球与上表面是相切的。不难想到，当这个距离减小，也就是小球继续往上移时，小球和上表面相交。也就是说，当小球球心到上表面的距离小于等于r，小球与上表面联通。将这个距离转换成坐标，则小球的高度应大于等于h-r，此时小球到上表面的距离符合要求，小球与上表面联通。<br>下面的小球也是类似的，小球球心到下表面距离为r时小球与下表面相切，当这个距离减小，小球往下移动，小球与下表面相交。转换成坐标，则小球距离应当小于等于r，此时小球到下表面距离符合距离的要求，小球与下表面联通。)<br>本题要求我们处理奶酪中小洞的联通关系。<br>一听，“联通”？可能就会往图论上去想了。<br>我们还是由浅入深，把这题的常见思路说一说吧。  </p>
+<h1 id="0-由数据点出发"><a href="#0-由数据点出发" class="headerlink" title="0.由数据点出发"></a>0.由数据点出发</h1><p>首先，第一种最简单的思路适用于你花了大量时间去做后两题，发现自己没有时间写第一题的情况。我们来看一下数据范围。<br>我们会发现，有20%的数据点，n=1，h和r最大也就10000，数据非常的小，我们可以面向数据编程，直接判断下这唯一的洞是否同时打通上面和下面就可以了。<br>(接下来的思路是更为常见的思路。)  </p>
+<h1 id="1-暴力搜索"><a href="#1-暴力搜索" class="headerlink" title="1.暴力搜索"></a>1.暴力搜索</h1><p>首先从最暴力的方法入手，我们从打通奶酪最下边的洞入手，暴力搜索，看能不能搜到打通奶酪最上面的洞。<br>或者从上往下搜也没什么问题。<br>那么如何枚举一个洞联通到哪些在旁边的洞呢？很明显，每次枚举n-1个洞算球心距离再判断的话会浪费大量时间，也不方便我们处理。<br>所以，我们在输入一个洞的坐标的时候就可以先进行处理。<br>每次新加入一个洞就把它和前面出现的所有洞的球心距离算好，比较两球半径和。<br>如果说两个洞半径之和等于或大于球心距离的时候，也就是两个洞联通的时候，我们建一条边。<br>在建图完成之后，你就可以为所欲为了。你想宽搜或者深搜都没有问题。深搜的话建议加上记忆化，并记得在上下表面已经联通的时候直接回溯，不要浪费多余的时间。<br>基本上你就已经可以直接A掉这一题了。  </p>
+<h1 id="2-图论最短路-传递闭包"><a href="#2-图论最短路-传递闭包" class="headerlink" title="2.图论最短路/传递闭包"></a>2.图论最短路/传递闭包</h1><p>有人可能就想了，从下面到上面，我边都加上了，岂不是可以最短路？<br>只要有一个打通下面的点能到一个打通上面的点就可以了<br>诶传递闭包是不是也可以跑？因为只要a能到b，b能到c a就一定是可以到c的<br>但其实有一个很实际的因素:floyd跑传递闭包的时间复杂度O(n^3),n最大是1000<br>这种方法其实注定要凉<br>去年有人这么写，结果只得了40分(不过也不排除有更好的floyd实现能多拿点分)<br>最短路也不见得能好太多，毕竟最坏也要把所有打通下面的（或者上面的）点都跑一次最短路<br>鉴于这题暴力搜索都能过，想到了这一步其实已经属于想多了 但是在这个思考过程中我们可以更进一步得到一个更好用时间又少的方法  </p>
+<h1 id="3-并查集"><a href="#3-并查集" class="headerlink" title="3.并查集"></a>3.并查集</h1><p>在刚才讨论floyd算法的时候，我们说到一个性质 那就是只要小洞a能到小洞b，小洞b能到小洞c，从小洞a就一定是可以到小洞c的<br>也就是小洞间关系的传递性<br>到这一步就可以考虑用并查集维护小洞间的关系了<br>如果没有接触过或者不熟悉并查集的同学，建议现在可以读一下啊哈算法第七章第四节，或者去网上查一下相关资料再继续往下看。<br>接下来我们演示一下用并查集解决这一题的具体操作。<br>按照并查集的一半操作，我们先开一个数组并将其初始化。<br>然后我们模拟小洞之间合并的过程，当两个小球相立联的时候我们将它们合并。<br>例如这是我们的1号小球，在它之前没有任何小球出现过，也不会和任何小球联通。它也不与上下表面联通。<br>然后我们加入第二个小球。第二个小球与第一个小球相交。这时我们将两个小球进行合并。这里我们不使用按秩合并优化，按向左合并演示。<br>现在加入第三个小球。第三个小球与下表面接触，我们可以开一个数组，方便以后检查上表面是否和下表面联通。<br>例如我们开一个数组lower存储和下表面接触的小球，把3加入。<br>再加入第四个小球。第四个小球和上表面接触，我们再开一个数组upper专门存储和上表面接触的小球，我们将4加入这个数组。<br>然后我们加入第五个小球。同时和三号、四号小球相交，我们依次将小球合并。然后我们路径压缩一次。我们可以看到，并查集的结果应该是“11333”。<br>那我们把所有的小球合并完后，如何判断下表面能否联到上表面，其实相对的更加简单了。<br>之前我们单独存储了和上下表面联通的小球的编号。<br>例如对于更复杂的情况，我们再在lower、upper里加入更多的小球。<br>(画图)<br>对于这样的情况，我们如何判断呢？我们枚举lower和upper中的每一对小球，检查两个小球是否在同一集合内，如果两个小球在同一集合内，则表明可以从lower的那个小球通过与之连接的其他小球到达upper小球。<br>例如我们可以对3-4、3-9、3-10、6-4、6-9、6-10进行检查。<br>不过相对的，我们在检查3-4的时候，因为3和4在同一个集合，就已经能判断可以从下表面到达上表面了。我们可以从lower的3出发，通过在集合3(==parent[3])里的点，到达同样位于集合3的upper4，从而从下表面到达上表面。<br>这些就是本题用并查集去做的主要思路。<br>不过我们还有一些优化方面的建议。  </p>
+<h1 id="4-优化建议"><a href="#4-优化建议" class="headerlink" title="4.优化建议"></a>4.优化建议</h1><p>出题人在题面中给出了求两点距离的公式。但是我们不难注意到其中有一个根号。<br>我们都知道除法、根号都是花费时间比较多的运算，应尽量避免。那么如何避免这个根号的产生呢？<br>其实很简单。这是我们原本的式子。将这个不等式两边平方，我们得到这个式子。<br>现在，我们只用比较两点距离的平方和4r2。就这样我们可以对计算过程中的时间复杂度进行优化。<br>另外，刚才演示时我们在并查集中没采用按秩排序，也不是每次操作都进行了路径压缩。在实际实现中，请加上这两个优化以保证你的并查集的运行效率。  </p>
+<h1 id="5-并查集总结"><a href="#5-并查集总结" class="headerlink" title="5.并查集总结"></a>5.并查集总结</h1><p>那么到底什么情况可以考虑用并查集呢？<br>刚才在讨论Floyd时，我们提到了传递性。<br>那么是不是一定只要是具有传递性的关系就可以用并查集维护呢？<br>大家看一下这一道“星球的偶像”这题。先仔细思考，做出你的判断，再往下看。<br>。。。。。。。。<br>答案揭晓：这题是不行的。<br>当A崇拜B，B崇拜C，A确实崇拜C。<br>但是如果用并查集，ABC三个点的父亲编号应该是一样的。<br>那这是不是意味着C崇拜A呢？事实不是这样。<br>问题就在，A崇拜B，B却不一定崇拜A。<br>这题的正确解法是用强联通算法，感兴趣的同学可以再去了解。<br>所以使用并查集的两个重要条件，也就是传递性以及相互性就很明显了吧。  </p>
+<h1 id="6-代码"><a href="#6-代码" class="headerlink" title="6.代码"></a>6.代码</h1><p>以下是我的代码实现。除了加边的部分我是倒过来，也就是检查每个点和它后面的点是否联通以外，其他的代码和上面的描述是一致的。  </p>
+<h1 id="7-视频"><a href="#7-视频" class="headerlink" title="7.视频"></a>7.视频</h1><p>可惜并不是我讲的XD</p>
+<p><iframe src="//player.bilibili.com/player.html?aid=36159268&cid=63479095&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="min-height: 100px;width: 100%" id="Video" class="VideoPlayer" onmouseenter="refreshRatio()"> </iframe></p>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/videoRefresher.js"></script>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://music.163.com/song/media/outer/url?id=1332904662"></li>
+                    
+                        <li title="1" data-url="http://music.163.com/song/media/outer/url?id=456185161"></li>
+                    
+                        <li title="2" data-url="http://music.163.com/song/media/outer/url?id=546730054"></li>
+                    
+                        <li title="3" data-url="http://music.163.com/song/media/outer/url?id=507116551"></li>
+                    
+                </ul>
+            
+        </div>
+        
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/diaspora.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/plugin.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/beaconCompatCheck.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/videoRefresher.js"></script>
+<link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/default-skin/default-skin.css">
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe.min.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</html>

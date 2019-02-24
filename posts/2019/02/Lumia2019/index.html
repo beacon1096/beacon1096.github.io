@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>猫窝 - 新家</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Beacon1096,"> 
+    <meta name="description" content="一个超级无敌蒟蒻的OIer,"> 
+    <meta name="author" content="Beacon Zhang"> 
+    <link rel="alternative" href="atom.xml" title="猫窝" type="application/atom+xml"> 
+    <link rel="icon" href="https://beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">2019年Lumia的最新操作</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">2019年Lumia的最新操作</h1>
+        <div class="stuff">
+            <span>二月 03, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/2019/">2019</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Lumia/">Lumia</a></li></ul>
+
+
+        </div>
+        <div class="content markdown" id="article">
+            <p>此处存放一些关于Lumia的RT/WOA/Linux/UEFI Bootshim的最新进展/教程。                                                                                                                                                                                                                  .</p>
+<p>修订版1.01，更新于2019.2.3 22:25  </p>
+<hr>
+<hr>
+<p>Lumia 950XL(msm8996) X Ubuntu/Debian:</p>
+<h1 id="Linux-on-Lumia-Guide"><a href="#Linux-on-Lumia-Guide" class="headerlink" title="Linux on Lumia Guide"></a>Linux on Lumia Guide</h1><p>Version 0.2 (preliminary) by enox.  </p>
+<p>Thanks to imbushuo for providing a 950XL-compatible kernel, all involved with Windows Phone Internals, and LumiaWOA.  </p>
+<p>Thanks also to Cooper Maxwell for testing and error correction.  </p>
+<h2 id="Guide"><a href="#Guide" class="headerlink" title="Guide"></a>Guide</h2><p>This guide will require some Linux knowledge and will perform potentially destructive operations on the phone being modified.<br><strong>If you are not comfortable with risking the future operation of your device, do not perform this process.</strong>  </p>
+<p>This guide will require internet access.  </p>
+<p>Instructions have been tested under Ubuntu 18.04 as a host system with Debian 9 (stretch) as the phone system, but it may work with other versions of Debian and Ubuntu. The version of Linux to be installed is up to the user and can be changed by swapping “stretch” in step 7 for some other codename for an Ubuntu or Debian version which supports ARM64 (such as xenial for Ubuntu 16.04 or bionic for Ubuntu 18.04). Note that currently Ubuntu may not work. More testing is required.  </p>
+<p>Step 0 requires Windows and Windows Phone Internals.<br>Steps 1 to 3 may be performed under Windows.<br>Steps 4+ will require Linux and some understanding of Linux operation.  </p>
+<p>Wherever “the FAT32 partition” is referenced, it refers to the 1GB partition created in step 2.<br>Wherever “/path/to/ext3/partition” is referenced, it refers to the 16GB partition created in step 4.  </p>
+<p>If you have only one drive in your PC or virtual machine, the phone will likely be addressed as /dev/sdb, and as a result the FAT32 and ext3 partitions you create will likely be /dev/sdb41 and /dev/sdb42 respectively. These partitions should be mounted and addressed throughout this guide according to the mount points you assign them (eg: /media/boot/ and /media/root/).  </p>
+<h3 id="Phone-prep"><a href="#Phone-prep" class="headerlink" title="Phone prep:"></a><strong>Phone prep:</strong></h3><ul>
+<li><strong>Step 0: Unlock Lumia 950XL via usual Windows Phone Internals method</strong>  </li>
+<li><strong>Step 1: Perform usual BootShim/UEFI installation, per WoA instructions</strong>  </li>
+<li><strong>Step 2: Reduce Data partition size (8GB is fine, leaving ~16GB for Linux and ~2GB spare)</strong><br>Change only the Data partition, do not modify any other existing partitions.  </li>
+<li><strong>Step 3: Create new FAT32 partition (boot partition, will contain GRUB etc, 1GB is plenty)</strong>  </li>
+<li><strong>Step 4: Create new ext3/4 partition (root partition, will contain Linux, should be created from within Linux)</strong> <h3 id="Linux-root-partition-prep"><a href="#Linux-root-partition-prep" class="headerlink" title="Linux root partition prep:"></a><strong>Linux root partition prep:</strong></h3></li>
+<li><strong>Step 5: Install Ubuntu or Debian</strong><br>Native or virtual machine will both work, and if you have an existing modern Debian or Ubuntu installation then it may work too. May require a reboot before apt commands work on a fresh install.</li>
+<li><p><strong>Step 6: Run the following command:</strong><br><em>sudo apt install debootstrap <strong>qemu-user-static</strong></em><br>This will install the necessary tools to build a new installation of Debian on the phone.  </p>
+<font color="crimson">This step has been updated, previously it specified that “qemu-debootstrap” should be installed, but this is contained within the “qemu-user-static” package.</font>  
+</li>
+<li><p><strong>Step 7: Run the following command:</strong><br><em>sudo qemu-debootstrap –arch=arm64 stretch /path/to/ext3/partition/</em><br>This will build a basic Debian installation on the phone.<br>This step may take some time.  </p>
+</li>
+<li><p><strong>Step 8: Download the following file, extract it, and copy it to your Debian installation environment</strong><br><a href="https://dev.azure.com/imbushuo-personal/006cd3ae-7802-4bc6-a7f6-86862cd5fb1d/_apis/build/builds/3/artifacts?artifactName=DebPkgs&amp;api-version=5.0&amp;%24format=zip" target="_blank" rel="noopener">File From imbushuo’s Azure DevOps</a><br>Copy the .deb files contained within it to an accessible location within the ext3 partition.</p>
+</li>
+<li><p><strong>Step 9: Run the following command:</strong><br><em>chroot /path/to/ext3/partition</em><br>This command will create a shell session within the new ARM64 Linux installation, this is the shell which is part of the Linux installation located on the phone. Any command you enter here will affect the installation which will run on the phone and not the installation on your local machine.</p>
+<h3 id="Inside-chroot"><a href="#Inside-chroot" class="headerlink" title="Inside chroot:"></a>Inside chroot:</h3></li>
+<li><p><strong>Step 10: Run the following commands:</strong><br><em>apt install /path/to/linux-headers-4.18.6-lumia-950xl-uefi_4.18.6-20181101-3_arm64.deb</em><br><em>apt install /path/to/linux-libc-dev_4.18.6-20181101-3_arm64.deb</em><br><em>apt install /path/to/linux-image-4.18.6-lumia-950xl-uefi_4.18.6-20181101-3_arm64.deb</em><br>The path to these files should be the location where they were copied to within the chroot environment during step 8. They may not all be required, but testing is required, so install them all anyway.  </p>
+</li>
+<li><p><strong>Step 11: Run the following commands:</strong><br><em>apt install initramfs-tools</em><br><em>update-initramfs -c -k 4.18.6-lumia-950xl-uefi</em></p>
+</li>
+<li><p><strong>Step 12: Download the following file, extract the .dtb file and copy it to /path/to/ext3/boot/</strong><br><a href="https://dev.azure.com/imbushuo-personal/2dd97f8f-46b8-47d3-be52-28d97814eb4e/_apis/build/builds/53/artifacts?artifactName=DTB&amp;api-version=5.0&amp;%24format=zip" target="_blank" rel="noopener">File From imbushuo’s Azure DevOps</a>  </p>
+</li>
+<li><p><strong>Step 13: Run the following command:</strong><br><em>apt install tasksel</em><br>This installs the application which allows the user to configure a Debian or Ubuntu installation. It would typically be run during installation via a liveCD or similar, however it must be run manually here as there are currently no installation scripts. It may or may not already be installed as part of the base system, in which case it will simply say that it is already installed, which can be ignored.<br>It may also be necessary to follow this command with the following:<br><em>apt update</em><br>This can prevent some “tasksel: apt-get failed (100)” errors in the next step.  </p>
+</li>
+<li><p><strong>Step 14: Run the following command:</strong><br><em>tasksel</em><br>Select “Debian desktop environment” and a desktop environment of your choice (GNOME, KDE, etc – if you don’t know, you may choose GNOME, which has convenient touchscreen support, but is slow) for installation, confirm your choice by tabbing to “ok” and hitting Enter, and wait. Unfortunately during testing this step has proven to be unreliable when installing Debian in particular, so it may need to be restarted if it fails with a “tasksel: apt-get failed (100)” error. When the process has completed, it will drop back to the shell, so verify that the shell output doesn’t show an error before continuing to the next step.<br>This step may take some time.  </p>
+</li>
+<li><p><strong>Step 15: Run the following command:</strong><br><em>adduser user</em><br>Where “user” is the username you wish to use, eg: “adduser john” or “adduser jane”. Enter a password when requested (and again to confirm). This will be your user account. Accept the defaults for Full Name, Room Number, etc.  </p>
+</li>
+<li><p><strong>Step 16: Enable autologin (varies depending on distribution and version, instructions provided for Debian or Ubuntu with GNOME3)</strong><br>Edit /etc/gdm3/daemon.conf:<br>This will require the installation of an editor, if you do not have one, use this command:<br><em>apt install nano</em><br>You should now have an editor installed. Run the following command:<br><em>nano /etc/gdm3/daemon.conf</em><br>There are two lines which must be edited:<br><em># AutomaticLoginEnable = true</em><br>Remove the # at the beginning of this line.<br><em># AutomaticLogin = user1</em><br>Remove the # at the beginning of this line and replace “user1” with the username you chose earlier.<br>Exit using Ctrl+X, type Y and then Enter. You should now be back at the command line.  </p>
+</li>
+<li><p><strong>Step 17: Download the following file and extract its contents to the FAT32 partition</strong><br>GRUB-EFI.zip (see enclosed)<br><a href="https://beaconhosted-1258087381.cos.ap-chengdu.myqcloud.com/download/imbushuo/GRUB-EFI.zip" target="_blank" rel="noopener">Originally from Telegram Group “LumiaWOA”, uploaded to BeaconHosted</a>  </p>
+</li>
+<li><p><strong>Step 18: Close the shell and unmount the phone’s partitions:</strong><br>Run the following command:<br><em>exit</em><br>Then, back in the native machine’s shell, run the following commands:<br><em>sudo umount /path/to/fat32/partition</em><br><em>sudo umount /path/to/ext3/partition</em><br>This should conclude the installation. Reboot the phone by long-pressing the power button, select “Linux” from the boot menu using the camera button and then select “Linux” in GRUB using the power button. Booting may take a moment and the screen may turn black for a while, but you should eventually see a desktop.  </p>
+</li>
+</ul>
+<hr>
+<hr>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="https://music.163.com/song/media/outer/url?id=865868058">
+            </audio>
+            
+        </div>
+        
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/diaspora.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/plugin.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/beaconCompatCheck.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/js/videoRefresher.js"></script>
+<link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/default-skin/default-skin.css">
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe.min.js"></script>
+<script src="//beacon1096-github-io-1258087381.cos.ap-chengdu.myqcloud.com/site/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</html>
