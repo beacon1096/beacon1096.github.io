@@ -160,7 +160,12 @@ var Diaspora = {
             },
             'ended': function() {
                 $('.icon-pause').removeClass('icon-pause').addClass('icon-play')
-                p[0].src = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
+                audiolist = $('#audio-list li');
+                var mp3 = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
+                while(p[0].src === mp3){
+                    mp3 = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
+                }
+                p[0].src = mp3;
                 p[0].pause();
                 p[0].play();
             },
