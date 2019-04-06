@@ -160,6 +160,9 @@ var Diaspora = {
             },
             'ended': function() {
                 $('.icon-pause').removeClass('icon-pause').addClass('icon-play')
+                p[0].src = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
+                p[0].pause();
+                p[0].play();
             },
             'playing': function() {
                 $('.icon-play').removeClass('icon-play').addClass('icon-pause')
