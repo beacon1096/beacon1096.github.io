@@ -137,8 +137,9 @@ var Diaspora = {
             })
             return
         }
-        var sourceSrc= $("#audio source").eq(0).attr('src')
-        if (sourceSrc == '' && p[0].src == ''){
+        //var sourceSrc= $("#audio source").eq(0).attr('src')
+        //if (sourceSrc == '' && p[0].src == ''){
+        if (p[0].src == ''){
             audiolist = $('#audio-list li');
             mp3 = audiolist.eq([Math.floor(Math.random() * audiolist.size())])
             p[0].src = mp3.data('url')
@@ -162,10 +163,10 @@ var Diaspora = {
                 $('.icon-pause').removeClass('icon-pause').addClass('icon-play')
                 audiolist = $('#audio-list li');
                 var mp3 = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
-                while(p[0].src === mp3){
+                while(p[0].src === mp3.data('url')){
                     mp3 = audiolist.eq([Math.floor(Math.random() * audiolist.size())]);
                 }
-                p[0].src = mp3;
+                p[0].src = mp3.data('url');
                 p[0].pause();
                 p[0].play();
             },
