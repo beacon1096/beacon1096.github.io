@@ -1,0 +1,3 @@
+[submodule "themes/diaspora"]
+	path = themes/diaspora
+	url = https://github.com/beacon1096/hexo-theme-diaspora.git
